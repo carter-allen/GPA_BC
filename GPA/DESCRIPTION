@@ -1,0 +1,15 @@
+Package: GPA
+Version: 1.1-0
+Date: 2017-06-30
+Title: GPA (Genetic analysis incorporating Pleiotropy and Annotation)
+Author: Dongjun Chung, Emma Kortemeier
+Maintainer: Dongjun Chung <chungd@musc.edu>
+Depends: R (>= 3.0.0), methods, graphics, Rcpp, parallel, ggplot2,
+        ggrepel, plyr, vegan, DT, shiny, shinyBS
+Suggests: gpaExample
+LinkingTo: Rcpp
+Description: This package provides functions for fitting GPA, a statistical framework to prioritize GWAS results by integrating pleiotropy information and annotation data. In addition, it also includes ShinyGPA, an interactive visualization toolkit to investigate pleiotropic architecture.
+License: GPL (>= 2)
+URL: http://dongjunchung.github.io/GPA/
+NeedsCompilation: yes
+Packaged: 2017-07-07 04:09:40 UTC; dongjunchung
