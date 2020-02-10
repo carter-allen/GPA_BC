@@ -1,0 +1,27 @@
+* using log directory ‘/Users/carterallen/Documents/rdev/GPA_BC/GPA.Rcheck’
+* using R version 3.6.2 (2019-12-12)
+* using platform: x86_64-apple-darwin15.6.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘GPA/DESCRIPTION’ ... OK
+* this is package ‘GPA’ version ‘1.1-0’
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+Depends: includes the non-default packages:
+  'Rcpp', 'parallel', 'ggplot2', 'ggrepel', 'plyr', 'vegan', 'DT',
+  'shiny', 'shinyBS'
+Adding so many packages to the search path is excessive and importing
+selectively is preferable.
+* checking if this is a source package ... WARNING
+Subdirectory ‘GPA/src’ contains apparent object files/libraries
+  GPA.so cppEM.o
+Object files/libraries should not be included in a source package.
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘GPA’ can be installed ... ERROR
+Installation failed.
+See ‘/Users/carterallen/Documents/rdev/GPA_BC/GPA.Rcheck/00install.out’ for details.
+* DONE
+Status: 1 ERROR, 1 WARNING, 1 NOTE

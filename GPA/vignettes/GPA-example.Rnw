@@ -46,6 +46,7 @@ $~^9$ VA Cooperative Studies Program Coordinating Center, West Haven, CT, USA.
 \SweaveOpts{engine=R, echo=TRUE, pdf=TRUE}
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 %\VignetteIndexEntry{GPA}
 %\VignetteKeywords{GPA}
 %\VignettePackage{GPA}
