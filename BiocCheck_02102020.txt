@@ -1,0 +1,30 @@
+Summary:
+ERROR count: 4
+WARNING count: 3
+NOTE count: 9
+For detailed information about these checks, see the BiocCheck
+vignette, available at
+https://bioconductor.org/packages/3.11/bioc/vignettes/BiocCheck/inst/doc/BiocCheck.html#interpreting-bioccheck-output
+BiocCheck FAILED.
+$error
+[1] "Packages providing 54 object(s) used in this package should be imported in the NAMESPACE file, otherwise packages importing this package may fail."
+[2] "No biocViews terms found."                                                                                                                         
+[3] "At least 80% of man pages documenting exported objects must have runnable examples. The following pages do not:"                                   
+[4] "Maintainer must register at the support site; visit https://support.bioconductor.org/accounts/signup/ ."                                           
+
+$warning
+[1] "Update R version dependency from 3.0.0 to 4.0."                                   
+[2] "Remove vignette sources from inst/doc; they belong in vignettes/."                
+[3] "Add non-empty \\value sections to the following man pages: BC/GPA/man/shinyGPA.Rd"
+
+$note
+[1] "Consider clarifying how 15 object(s) are initialized. Maybe they are part of a data set loaded with data(), or perhaps part of an object referenced in with() or within()."        
+[2] " Avoid 1:...; use seq_len() or seq_along()"                                                                                                                                        
+[3] "Recommended function length <= 50 lines."                                                                                                                                          
+[4] "Usage of dontrun{} / donttest{} found in man page examples."                                                                                                                       
+[5] "Consider adding unit tests. We strongly encourage them. See\n  http://bioconductor.org/developers/how-to/unitTesting-guidelines/."                                                 
+[6] "Consider shorter lines; 201 lines (7%) are > 80 characters long."                                                                                                                  
+[7] "Consider 4 spaces instead of tabs; 1057 lines (39%) contain tabs."                                                                                                                 
+[8] "Consider multiples of 4 spaces for line indents, 419 lines(15%) are not."                                                                                                          
+[9] "Cannot determine whether maintainer is subscribed to the bioc-devel\nmailing list (requires admin credentials).  Subscribe here:\nhttps://stat.ethz.ch/mailman/listinfo/bioc-devel"
+
