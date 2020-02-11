@@ -1,0 +1,18 @@
+* installing *source* package ‘GPA’ ...
+** using staged installation
+** libs
+make: Nothing to be done for 'all'.
+installing to /home/carterallen/Documents/rdev/GPA_BC/GPA.Rcheck/00LOCK-GPA/00new/GPA/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Creating a new generic function for ‘cov’ in package ‘GPA’
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (GPA)
