@@ -1,9 +1,0 @@
-useDynLib(GPA)
-
-import( methods, graphics, Rcpp )
-
-export( GPA, assoc, aTest, pTest )
-
-export( show, print, fdr, cov, estimates, se )
-
-export( fitAll, shinyGPA )
