@@ -74,7 +74,6 @@ PLoS Genetics, 10: e1004787. (* joint first authors)
 \examples{
 showClass("GPA")
 
-\dontrun{		
 fit.GPA.wAnn <- GPA( pmat, ann )
 fit.GPA.wAnn
 pp.GPA.wAnn <- print( fit.GPA.wAnn )
@@ -84,6 +83,6 @@ fdr1..GPA.wAnn <- fdr( fit.GPA.wAnn, pattern="1*" )
 cov.GPA.wAnn <- cov( fit.GPA.wAnn )
 est.GPA.wAnn <- estimates( fit.GPA.wAnn )
 se.GPA.wAnn <- se( fit.GPA.wAnn )
-}
+
 }
 \keyword{classes}

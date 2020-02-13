@@ -41,7 +41,7 @@ PLoS Genetics, 10: e1004787. (* joint first authors)
 \code{\linkS4class{GPA}}.
 }
 \examples{
-\dontrun{
+
 # GPA without annotation data
 
 fit.GPA.noAnn <- GPA( pmat, NULL )
@@ -53,7 +53,7 @@ fit.GPA.pleiotropy.H0 <- GPA( pmat, NULL, pleiotropyH0=TRUE )
 # hypothesis testing for pleiotropy
 
 test.pleiotropy <- pTest( fit.GPA.noAnn, fit.GPA.pleiotropy.H0 )
-}
+
 }
 \keyword{models}
 \keyword{methods}

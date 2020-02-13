@@ -27,7 +27,7 @@ Kortemeier E, Ramos PS, Hunt KJ, Kim HJ, Hardiman G, and Chung D (2017),
 \code{\link{fitAll}}.
 }
 \examples{
-\dontrun{
+
 # simulator function
 
 simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
@@ -61,7 +61,7 @@ out <- fitAll( pmat )
 # Run the ShinyGPA app using the ouput from fitAll()
 
 shinyGPA(out)
-}
+
 }
 \keyword{models}
 \keyword{methods}

@@ -40,7 +40,6 @@ PLoS Genetics, 10: e1004787. (* joint first authors)
 \code{\linkS4class{GPA}}.
 }
 \examples{
-\dontrun{
 # GPA without annotation data
 
 fit.GPA.noAnn <- GPA( pmat, NULL )
@@ -52,7 +51,7 @@ fit.GPA.wAnn <- GPA( pmat, ann )
 # hypothesis testing for annotation enrichment
 
 test.annotation <- aTest( fit.GPA.noAnn, fit.GPA.wAnn )
-}
+
 }
 \keyword{models}
 \keyword{methods}
