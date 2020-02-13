@@ -56,11 +56,11 @@ Newton MA, Noueiry A, Sarkar D, and Ahlquist P (2004),
 \code{\linkS4class{GPA}}.
 }
 \examples{
-\dontrun{
+
 fit.GPA.wAnn <- GPA( pmat, ann )
 cov.GPA.wAnn <- cov( fit.GPA.wAnn )
 assoc.GPA.wAnn <- assoc( fit.GPA.wAnn, FDR=0.05, fdrControl="global" )
-}
+
 }
 \keyword{models}
 \keyword{methods}
