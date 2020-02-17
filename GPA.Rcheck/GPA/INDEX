@@ -1,0 +1,10 @@
+GPA                     Fit GPA model
+GPA-class               Class "GPA"
+GPA-package             GPA (Genetic analysis incorporating Pleiotropy
+                        and Annotation)
+aTest                   Hypothesis testing for annotation enrichment
+assoc                   Association mapping
+fitAll                  Fit GPA model for all possible pairs of GWAS
+                        datasets
+pTest                   Hypothesis testing for pleiotropy
+shinyGPA                Run ShinyGPA app
