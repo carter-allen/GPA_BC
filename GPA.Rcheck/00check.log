@@ -89,12 +89,8 @@ to your NAMESPACE file.
 * checking line endings in C/C++/Fortran sources/headers ... OK
 * checking line endings in Makefiles ... OK
 * checking compilation flags in Makevars ... OK
-* checking for GNU extensions in Makefiles ... WARNING
-Found the following file(s) containing GNU extensions:
-  src/Makevars
-Portable Makefiles do not use GNU extensions such as +=, :=, $(shell),
-$(wildcard), ifeq ... endif, .NOTPARALLEL See section ‘Writing portable
-packages’ in the ‘Writing R Extensions’ manual.
+* checking for GNU extensions in Makefiles ... NOTE
+GNU make is a SystemRequirements.
 * checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
 * checking use of PKG_*FLAGS in Makefiles ... OK
 * checking compiled code ... OK
@@ -108,4 +104,4 @@ packages’ in the ‘Writing R Extensions’ manual.
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 1 WARNING, 3 NOTEs
+Status: 4 NOTEs

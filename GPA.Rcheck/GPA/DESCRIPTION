@@ -14,6 +14,7 @@ License: GPL (>= 2)
 URL: https://groups.google.com/forum/#!forum/gpa-user-group
 git_url: http://dongjunchung.github.io/GPA/
 NeedsCompilation: yes
-Packaged: 2020-02-19 18:59:17 UTC; carterallen
+Packaged: 2020-02-19 19:12:18 UTC; carterallen
 biocViews: Software, StatisticalMethod, Classification
-Built: R 4.0.0; x86_64-pc-linux-gnu; 2020-02-19 18:59:31 UTC; unix
+SystemRequirements: GNU make
+Built: R 4.0.0; x86_64-pc-linux-gnu; 2020-02-19 19:12:42 UTC; unix
