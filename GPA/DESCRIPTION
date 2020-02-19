@@ -16,3 +16,4 @@ git_url: http://dongjunchung.github.io/GPA/
 NeedsCompilation: yes
 Packaged: 2017-07-07 04:09:40 UTC; dongjunchung
 biocViews: Software, StatisticalMethod, Classification
+SystemRequirements: GNU make
