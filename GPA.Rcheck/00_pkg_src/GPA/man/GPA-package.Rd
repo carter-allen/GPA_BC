@@ -51,7 +51,7 @@ Kortemeier E, Ramos PS, Hunt KJ, Kim HJ, Hardiman G, and Chung D (2017),
 \code{\linkS4class{GPA}}, \code{\link{fitAll}}, \code{\link{shinyGPA}}.
 }
 \examples{
-
+\dontrun{
 # simulation setting
 
 nBin <- 1000
@@ -144,5 +144,5 @@ out <- fitAll( pmat )
 # Run the ShinyGPA app using the ouput from fitAll()
 
 shinyGPA(out)
-
+}
 }

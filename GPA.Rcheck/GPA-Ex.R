@@ -77,100 +77,100 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-
-# simulation setting
-
-nBin <- 1000
-pi1 <- 0.2
-common <- 0.5
-betaAlpha <- c( 0.6, 0.6 )
-annP <- c( 0.2, 0.4, 0.4, 0.4 )
-seed <- 12345
-
-# simulation setting
-
-nCommon <- round( pi1 * common * nBin )
-nUniq <- round( pi1 * ( 1 - common ) * nBin )
-nBg <- nBin - 2 * nUniq - nCommon
-
-# M * K matrix of GWAS p-value
-
-set.seed( seed )
-
-pvec1 <- c( rbeta( nCommon, betaAlpha[1], 1 ), rbeta( nUniq, betaAlpha[1], 1 ), 
-	runif( nUniq ), runif( nBg ) )
-pvec2 <- c( rbeta( nCommon, betaAlpha[2], 1 ), runif( nUniq ),
-	rbeta( nUniq, betaAlpha[2], 1 ), runif( nBg ) )
-pmat <- cbind( pvec1, pvec2 )
-
-# M * D matrix of annotation
- 	
-ann <- c( 
-	sample( c(1,0), nCommon, replace=TRUE, prob = c( annP[4], 1 - annP[4] ) ), 
-	sample( c(1,0), nUniq, replace=TRUE, prob = c( annP[2], 1 - annP[2] ) ),
-	sample( c(1,0), nUniq, replace=TRUE, prob = c( annP[3], 1 - annP[3] ) ),
-	sample( c(1,0), nBg, replace=TRUE, prob = c( annP[1], 1 - annP[1] ) ) )
-		
-# GPA without annotation data
-
-fit.GPA.noAnn <- GPA( pmat, NULL )
-cov.GPA.noAnn <- cov( fit.GPA.noAnn )
-		
-# GPA with annotation data
-
-fit.GPA.wAnn <- GPA( pmat, ann )
-cov.GPA.wAnn <- cov( fit.GPA.wAnn )
-
-# GPA under pleiotropy H0
-
-fit.GPA.pleiotropy.H0 <- GPA( pmat, NULL, pleiotropyH0=TRUE )
-
-# association mapping
-
-assoc.GPA.wAnn <- assoc( fit.GPA.wAnn, FDR=0.05, fdrControl="global" )
-
-# hypothesis testing for pleiotropy
-
-test.pleiotropy <- pTest( fit.GPA.noAnn, fit.GPA.pleiotropy.H0 )
-
-# hypothesis testing for annotation enrichment
-
-test.annotation <- aTest( fit.GPA.noAnn, fit.GPA.wAnn )
-
-# simulator function
-
-simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
-  
-  m <- length(risk.ind)
-  
-  p.sig <- rbeta( m, alpha, 1 )
-  pvec <- runif(nsnp)
-  pvec[ risk.ind ] <- p.sig
-  
-  return(pvec)
-}
-
-# run simulation
-
-set.seed(12345)
-nsnp <- 1000
-alpha <- 0.4
-pmat <- matrix( NA, nsnp, 5 )
-
-pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
-pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
-pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
-pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
-pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
-
-# Fit GPA for all possible pairs of GWAS datasets
-
-out <- fitAll( pmat )
-
-# Run the ShinyGPA app using the ouput from fitAll()
-
-shinyGPA(out)
-
+## Not run: 
+##D # simulation setting
+##D 
+##D nBin <- 1000
+##D pi1 <- 0.2
+##D common <- 0.5
+##D betaAlpha <- c( 0.6, 0.6 )
+##D annP <- c( 0.2, 0.4, 0.4, 0.4 )
+##D seed <- 12345
+##D 
+##D # simulation setting
+##D 
+##D nCommon <- round( pi1 * common * nBin )
+##D nUniq <- round( pi1 * ( 1 - common ) * nBin )
+##D nBg <- nBin - 2 * nUniq - nCommon
+##D 
+##D # M * K matrix of GWAS p-value
+##D 
+##D set.seed( seed )
+##D 
+##D pvec1 <- c( rbeta( nCommon, betaAlpha[1], 1 ), rbeta( nUniq, betaAlpha[1], 1 ), 
+##D 	runif( nUniq ), runif( nBg ) )
+##D pvec2 <- c( rbeta( nCommon, betaAlpha[2], 1 ), runif( nUniq ),
+##D 	rbeta( nUniq, betaAlpha[2], 1 ), runif( nBg ) )
+##D pmat <- cbind( pvec1, pvec2 )
+##D 
+##D # M * D matrix of annotation
+##D  	
+##D ann <- c( 
+##D 	sample( c(1,0), nCommon, replace=TRUE, prob = c( annP[4], 1 - annP[4] ) ), 
+##D 	sample( c(1,0), nUniq, replace=TRUE, prob = c( annP[2], 1 - annP[2] ) ),
+##D 	sample( c(1,0), nUniq, replace=TRUE, prob = c( annP[3], 1 - annP[3] ) ),
+##D 	sample( c(1,0), nBg, replace=TRUE, prob = c( annP[1], 1 - annP[1] ) ) )
+##D 		
+##D # GPA without annotation data
+##D 
+##D fit.GPA.noAnn <- GPA( pmat, NULL )
+##D cov.GPA.noAnn <- cov( fit.GPA.noAnn )
+##D 		
+##D # GPA with annotation data
+##D 
+##D fit.GPA.wAnn <- GPA( pmat, ann )
+##D cov.GPA.wAnn <- cov( fit.GPA.wAnn )
+##D 
+##D # GPA under pleiotropy H0
+##D 
+##D fit.GPA.pleiotropy.H0 <- GPA( pmat, NULL, pleiotropyH0=TRUE )
+##D 
+##D # association mapping
+##D 
+##D assoc.GPA.wAnn <- assoc( fit.GPA.wAnn, FDR=0.05, fdrControl="global" )
+##D 
+##D # hypothesis testing for pleiotropy
+##D 
+##D test.pleiotropy <- pTest( fit.GPA.noAnn, fit.GPA.pleiotropy.H0 )
+##D 
+##D # hypothesis testing for annotation enrichment
+##D 
+##D test.annotation <- aTest( fit.GPA.noAnn, fit.GPA.wAnn )
+##D 
+##D # simulator function
+##D 
+##D simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
+##D   
+##D   m <- length(risk.ind)
+##D   
+##D   p.sig <- rbeta( m, alpha, 1 )
+##D   pvec <- runif(nsnp)
+##D   pvec[ risk.ind ] <- p.sig
+##D   
+##D   return(pvec)
+##D }
+##D 
+##D # run simulation
+##D 
+##D set.seed(12345)
+##D nsnp <- 1000
+##D alpha <- 0.4
+##D pmat <- matrix( NA, nsnp, 5 )
+##D 
+##D pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+##D pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+##D pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+##D pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+##D pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+##D 
+##D # Fit GPA for all possible pairs of GWAS datasets
+##D 
+##D out <- fitAll( pmat )
+##D 
+##D # Run the ShinyGPA app using the ouput from fitAll()
+##D 
+##D shinyGPA(out)
+## End(Not run)
 
 
 
@@ -463,41 +463,42 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
-
-# simulator function
-
-simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
-  
-  m <- length(risk.ind)
-  
-  p.sig <- rbeta( m, alpha, 1 )
-  pvec <- runif(nsnp)
-  pvec[ risk.ind ] <- p.sig
-  
-  return(pvec)
-}
-
-# run simulation
-
-set.seed(12345)
-nsnp <- 1000
-alpha <- 0.3
-pmat <- matrix( NA, nsnp, 5 )
-
-pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
-pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
-pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
-pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
-pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
-
-# Fit GPA for all possible pairs of GWAS datasets
-
-out <- fitAll( pmat )
-
-# Run the ShinyGPA app using the ouput from fitAll()
-
-shinyGPA(out)
-
+## Not run: 
+##D 
+##D # simulator function
+##D 
+##D simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
+##D   
+##D   m <- length(risk.ind)
+##D   
+##D   p.sig <- rbeta( m, alpha, 1 )
+##D   pvec <- runif(nsnp)
+##D   pvec[ risk.ind ] <- p.sig
+##D   
+##D   return(pvec)
+##D }
+##D 
+##D # run simulation
+##D 
+##D set.seed(12345)
+##D nsnp <- 1000
+##D alpha <- 0.3
+##D pmat <- matrix( NA, nsnp, 5 )
+##D 
+##D pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+##D pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+##D pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+##D pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+##D pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+##D 
+##D # Fit GPA for all possible pairs of GWAS datasets
+##D 
+##D out <- fitAll( pmat )
+##D 
+##D # Run the ShinyGPA app using the ouput from fitAll()
+##D 
+##D shinyGPA(out)
+## End(Not run)
 
 
 
