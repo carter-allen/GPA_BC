@@ -73,6 +73,419 @@ Slots:
 Name:       fit  setting gwasPval   annMat
 Class:     list     list   matrix   matrix
 > 
+> # simulator function
+> 
+> simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
++   
++   m <- length(risk.ind)
++   
++   p.sig <- rbeta( m, alpha, 1 )
++   pvec <- runif(nsnp)
++   pvec[ risk.ind ] <- p.sig
++   
++   return(pvec)
++ }
+> 
+> # run simulation
+> 
+> set.seed(12345)
+> nsnp <- 1000
+> alpha <- 0.3
+> pmat <- matrix( NA, nsnp, 5 )
+> 
+> pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+> pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+> pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+> pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+> pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+> 
+> ann <- rbinom(n = nrow(pmat), size = 1, prob = 0.15)
+> ann <- as.matrix(ann,ncol = 1)
+> 
 > fit.GPA.wAnn <- GPA( pmat, ann )
-Error in GPA(pmat, ann) : object 'pmat' not found
-Execution halted
+Info: Number of GWAS data: 5
+Info: Number of annotation data: 1
+Info: Theoretically null distribution is used.
+Info: Annotation data is provided.
+Info: SNPs will be prioritized using annotation data.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 1251-th iteration because there is no improvements in log likelihood.
+> fit.GPA.wAnn
+Summary: GPA model fitting results (class: GPA)
+--------------------------------------------------
+Data summary:
+	Number of GWAS data: 5
+	Number of SNPs: 1000
+	Number of annotation data: 1
+Model setting:
+	Theoretical null distribution is assumed.
+Parameter estimates (standard errors):
+	alpha: 0.284 0.388 0.32 0.318 0.345
+	     ( 0.034 0.048 0.044 0.034 0.046 )
+	GWAS combination: 00000 10000 01000 11000 00100 10100 01100 11100 00010 10010 01010 11010 00110 10110 01110 11110 00001 10001 01001 11001 00101 10101 01101 11101 00011 10011 01011 11011 00111 10111 01111 11111
+	pi: 0.147 0.004 0.064 0.177 0.09 0.003 0.001 0.001 0.124 0.001 0.019 0.001 0.103 0.001 0.001 0.001 0.2 0.017 0.019 0.004 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.012 0.001 0.001 0.001
+	  ( 0.121 72.92 0.1 0.067 0.128 96.374 0.204 0.317 0.107 103.344 0.182 75.559 0.117 126.816 0.296 0.617 0.111 0.182 0.101 68.363 0.215 0.323 0.242 0.384 0.173 95.575 0.237 93.213 0.237 0.437 0.319 0.64 )
+	q:
+	Annotation #1:
+	    0.001 0.999 0.148 0.107 0.269 0.999 0.001 0.001 0.197 0.999 0.001 0.999 0.158 0.999 0.001 0.001 0.2 0.001 0.051 0.999 0.001 0.001 0.001 0.001 0.001 0.999 0.001 0.999 0.001 0.001 0.001 0.001
+	  ( 0.546 19.106 0.011 0.01 0.006 29.834 179.854 303.085 0.005 103.515 8.56 75.683 0.01 127.027 269.182 594.787 0.003 9.727 0.137 18.37 193.828 309.907 217.792 368.716 147.645 95.733 208.974 93.366 18.985 428.211 285.273 620.438 )
+
+	Ratio of q over baseline (00000):
+	GWAS combination: 10000 01000 11000 00100 10100 01100 11100 00010 10010 01010 11010 00110 10110 01110 11110 00001 10001 01001 11001 00101 10101 01101 11101 00011 10011 01011 11011 00111 10111 01111 11111
+	Annotation #1:
+	    999 147.936 106.807 269.188 999 1 1 196.991 999 1 999 158.484 999 1 1 199.809 1 50.874 999 1 1 1 1 1 999 1 999 1 1 1 1
+	  ( 545415.261 80736.294 58276.569 146897.434 545838.977 179474.275 303427.391 107498.982 554678.325 8233.165 550528.892 86475.8 559399.861 269469.04 594519.543 109035.622 9373.227 27666.153 545647.816 193444.681 310235.398 218125.957 368406.781 147274.074 554359.593 209285.813 552455.19 19345.041 427908.589 284970.309 620711.075 )
+--------------------------------------------------
+> pp.GPA.wAnn <- print( fit.GPA.wAnn )
+> fdr.GPA.wAnn <- fdr( fit.GPA.wAnn )
+> fdr11.GPA.wAnn <- fdr( fit.GPA.wAnn, pattern="11" )
+> fdr1..GPA.wAnn <- fdr( fit.GPA.wAnn, pattern="1*" )
+> cov.GPA.wAnn <- cov( fit.GPA.wAnn )
+ 
+alpha: 0.284 0.388 0.32 0.318 0.345
+     ( 0.034 0.048 0.044 0.034 0.046 )
+GWAS combination: 00000 10000 01000 11000 00100 10100 01100 11100 00010 10010 01010 11010 00110 10110 01110 11110 00001 10001 01001 11001 00101 10101 01101 11101 00011 10011 01011 11011 00111 10111 01111 11111
+pi: 0.147 0.004 0.064 0.177 0.09 0.003 0.001 0.001 0.124 0.001 0.019 0.001 0.103 0.001 0.001 0.001 0.2 0.017 0.019 0.004 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.012 0.001 0.001 0.001
+  ( 0.121 72.92 0.1 0.067 0.128 96.374 0.204 0.317 0.107 103.344 0.182 75.559 0.117 126.816 0.296 0.617 0.111 0.182 0.101 68.363 0.215 0.323 0.242 0.384 0.173 95.575 0.237 93.213 0.237 0.437 0.319 0.64 )
+q: 
+Annotation #1:
+	    0.001 0.999 0.148 0.107 0.269 0.999 0.001 0.001 0.197 0.999 0.001 0.999 0.158 0.999 0.001 0.001 0.2 0.001 0.051 0.999 0.001 0.001 0.001 0.001 0.001 0.999 0.001 0.999 0.001 0.001 0.001 0.001
+	  ( 0.546 19.106 0.011 0.01 0.006 29.834 179.854 303.085 0.005 103.515 8.56 75.683 0.01 127.027 269.182 594.787 0.003 9.727 0.137 18.37 193.828 309.907 217.792 368.716 147.645 95.733 208.974 93.366 18.985 428.211 285.273 620.438 )
+ 
+Ratio of q over baseline (00000):
+GWAS combination: 10000 01000 11000 00100 10100 01100 11100 00010 10010 01010 11010 00110 10110 01110 11110 00001 10001 01001 11001 00101 10101 01101 11101 00011 10011 01011 11011 00111 10111 01111 11111
+Annotation #1:
+	    999 147.936 106.807 269.188 999 1 1 196.991 999 1 999 158.484 999 1 1 199.809 1 50.874 999 1 1 1 1 1 999 1 999 1 1 1 1
+	  ( 545415.261 80736.294 58276.569 146897.434 545838.977 179474.275 303427.391 107498.982 554678.325 8233.165 550528.892 86475.8 559399.861 269469.04 594519.543 109035.622 9373.227 27666.153 545647.816 193444.681 310235.398 218125.957 368406.781 147274.074 554359.593 209285.813 552455.19 19345.041 427908.589 284970.309 620711.075 )
+> est.GPA.wAnn <- estimates( fit.GPA.wAnn )
+> se.GPA.wAnn <- se( fit.GPA.wAnn )
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("GPA-package")
+> ### * GPA-package
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: GPA-package
+> ### Title: GPA (Genetic analysis incorporating Pleiotropy and Annotation)
+> ### Aliases: GPA-package
+> ### Keywords: package
+> 
+> ### ** Examples
+> 
+> 
+> # simulation setting
+> 
+> nBin <- 1000
+> pi1 <- 0.2
+> common <- 0.5
+> betaAlpha <- c( 0.6, 0.6 )
+> annP <- c( 0.2, 0.4, 0.4, 0.4 )
+> seed <- 12345
+> 
+> # simulation setting
+> 
+> nCommon <- round( pi1 * common * nBin )
+> nUniq <- round( pi1 * ( 1 - common ) * nBin )
+> nBg <- nBin - 2 * nUniq - nCommon
+> 
+> # M * K matrix of GWAS p-value
+> 
+> set.seed( seed )
+> 
+> pvec1 <- c( rbeta( nCommon, betaAlpha[1], 1 ), rbeta( nUniq, betaAlpha[1], 1 ), 
++ 	runif( nUniq ), runif( nBg ) )
+> pvec2 <- c( rbeta( nCommon, betaAlpha[2], 1 ), runif( nUniq ),
++ 	rbeta( nUniq, betaAlpha[2], 1 ), runif( nBg ) )
+> pmat <- cbind( pvec1, pvec2 )
+> 
+> # M * D matrix of annotation
+>  	
+> ann <- c( 
++ 	sample( c(1,0), nCommon, replace=TRUE, prob = c( annP[4], 1 - annP[4] ) ), 
++ 	sample( c(1,0), nUniq, replace=TRUE, prob = c( annP[2], 1 - annP[2] ) ),
++ 	sample( c(1,0), nUniq, replace=TRUE, prob = c( annP[3], 1 - annP[3] ) ),
++ 	sample( c(1,0), nBg, replace=TRUE, prob = c( annP[1], 1 - annP[1] ) ) )
+> 		
+> # GPA without annotation data
+> 
+> fit.GPA.noAnn <- GPA( pmat, NULL )
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 1747-th iteration because there is no improvements in log likelihood.
+> cov.GPA.noAnn <- cov( fit.GPA.noAnn )
+ 
+alpha: 0.608 0.625
+     ( 0.187 0.138 )
+GWAS combination: 00 10 01 11
+pi: 0.61 0.179 0.21 0.001
+  ( 0.225 0.207 0.163 0.131 )
+> 		
+> # GPA with annotation data
+> 
+> fit.GPA.wAnn <- GPA( pmat, ann )
+Info: Number of GWAS data: 2
+Info: Number of annotation data: 1
+Info: Theoretically null distribution is used.
+Info: Annotation data is provided.
+Info: SNPs will be prioritized using annotation data.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops because it reaches the specified maximum number of iterations (maxIter = 2000).
+> cov.GPA.wAnn <- cov( fit.GPA.wAnn )
+ 
+alpha: 0.611 0.641
+     ( 0.188 0.136 )
+GWAS combination: 00 10 01 11
+pi: 0.63 0.14 0.186 0.044
+  ( 0.206 0.214 0.156 0.167 )
+q: 
+Annotation #1:
+	    0.256 0.375 0.223 0.001
+	  ( 0.079 0.328 0.236 0.673 )
+ 
+Ratio of q over baseline (00):
+GWAS combination: 10 01 11
+Annotation #1:
+	    1.467 0.872 0.004
+	  ( 1.633 1.152 2.633 )
+> 
+> # GPA under pleiotropy H0
+> 
+> fit.GPA.pleiotropy.H0 <- GPA( pmat, NULL, pleiotropyH0=TRUE )
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 1318-th iteration because there is no improvements in log likelihood.
+> 
+> # association mapping
+> 
+> assoc.GPA.wAnn <- assoc( fit.GPA.wAnn, FDR=0.05, fdrControl="global" )
+Info: Association mapping based on the global FDR control at level 0.05.
+Warning in max(pp.ordered[pp.cum <= FDR]) :
+  no non-missing arguments to max; returning -Inf
+Warning in max(pp.ordered[pp.cum <= FDR]) :
+  no non-missing arguments to max; returning -Inf
+> 
+> # hypothesis testing for pleiotropy
+> 
+> test.pleiotropy <- pTest( fit.GPA.noAnn, fit.GPA.pleiotropy.H0 )
+Hypothesis testing for pleiotropy
+--------------------------------------------------
+GWAS combination:  00 10 01 11 
+pi:  0.61 0.179 0.21 0.001 
+  (  0.225 0.207 0.163 0.131  )
+
+test statistics:  0.192 
+p-value:  0.6613542 
+  --------------------------------------------------
+> 
+> # hypothesis testing for annotation enrichment
+> 
+> test.annotation <- aTest( fit.GPA.noAnn, fit.GPA.wAnn )
+Hypothesis testing for annotation enrichment
+( Note: This version of test is designed for single annotation data )
+--------------------------------------------------
+q:
+GWAS combination:  00 10 01 11 
+Annotation # 1 :
+     0.256 0.375 0.223 0.001 
+  (  0.079 0.328 0.236 0.673  )
+
+Ratio of q over baseline ( 00 ):
+GWAS combination:  10 01 11 
+Annotation # 1 :
+     1.467 0.872 0.004 
+  (  1.633 1.152 2.633  )
+
+test statistics:  0.56 
+p-value:  0.9055136 
+  --------------------------------------------------
+> 
+> # simulator function
+> 
+> simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
++   
++   m <- length(risk.ind)
++   
++   p.sig <- rbeta( m, alpha, 1 )
++   pvec <- runif(nsnp)
++   pvec[ risk.ind ] <- p.sig
++   
++   return(pvec)
++ }
+> 
+> # run simulation
+> 
+> set.seed(12345)
+> nsnp <- 1000
+> alpha <- 0.4
+> pmat <- matrix( NA, nsnp, 5 )
+> 
+> pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+> pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+> pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+> pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+> pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+> 
+> # Fit GPA for all possible pairs of GWAS datasets
+> 
+> out <- fitAll( pmat )
+-------------------------------------------------------------
+Fitting GPA for all possible combination of GWAS datasets...
+-------------------------------------------------------------
+	GWAS pair: 1 and 2
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 955-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 1 and 3
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 182-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 1 and 4
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 1052-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 1 and 5
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 223-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 2 and 3
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 692-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 2 and 4
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 709-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 2 and 5
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 546-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 3 and 4
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 874-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 3 and 5
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 208-th iteration because there is no improvements in log likelihood.
+	GWAS pair: 4 and 5
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 252-th iteration because there is no improvements in log likelihood.
+
+Done!
+
+-------------------------------------------------------------
+Fitting GPA for all possible combination under H0...
+-------------------------------------------------------------
+Fit GPA for the GWAS 1 and 2
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 532-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 1 and 3
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 157-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 1 and 4
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 200-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 1 and 5
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 187-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 2 and 3
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 535-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 2 and 4
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 525-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 2 and 5
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 543-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 3 and 4
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 201-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 3 and 5
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 189-th iteration because there is no improvements in log likelihood.
+Fit GPA for the GWAS 4 and 5
+Info: Number of GWAS data: 2
+Info: Theoretically null distribution is used.
+Info: No annotation data is provided.
+Info: Fit the GPA model under H0 of the pleitropy test.
+Info: Lower bound for pi estimates is set to 1 / [number of SNPs].
+Info: EM algorithm stops in 205-th iteration because there is no improvements in log likelihood.
+
+Done!
+
+-------------------------------------------------------------
+Calculating pleiotropy test p-values...
+-------------------------------------------------------------
+Done!
+> 
+> # Run the ShinyGPA app using the ouput from fitAll()
+> 
+> shinyGPA(out)
+
+Listening on http://127.0.0.1:6678

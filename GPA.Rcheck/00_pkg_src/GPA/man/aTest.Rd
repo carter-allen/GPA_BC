@@ -40,6 +40,36 @@ PLoS Genetics, 10: e1004787. (* joint first authors)
 \code{\linkS4class{GPA}}.
 }
 \examples{
+
+# simulator function
+
+simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
+  
+  m <- length(risk.ind)
+  
+  p.sig <- rbeta( m, alpha, 1 )
+  pvec <- runif(nsnp)
+  pvec[ risk.ind ] <- p.sig
+  
+  return(pvec)
+}
+
+# run simulation
+
+set.seed(12345)
+nsnp <- 1000
+alpha <- 0.3
+pmat <- matrix( NA, nsnp, 5 )
+
+pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+
+ann <- rbinom(n = nrow(pmat), size = 1, prob = 0.15)
+ann <- as.matrix(ann,ncol = 1)
+
 # GPA without annotation data
 
 fit.GPA.noAnn <- GPA( pmat, NULL )

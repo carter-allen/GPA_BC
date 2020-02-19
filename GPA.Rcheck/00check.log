@@ -100,35 +100,4 @@ packages’ in the ‘Writing R Extensions’ manual.
 * checking compiled code ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... ERROR
-Running examples in ‘GPA-Ex.R’ failed
-The error most likely occurred in:
-
-> ### Name: GPA-class
-> ### Title: Class "GPA"
-> ### Aliases: GPA-class show,GPA-method print,GPA-method fdr,GPA-method
-> ###   cov,GPA-method estimates,GPA-method se,GPA-method fdr cov estimates
-> ###   se
-> ### Keywords: classes
-> 
-> ### ** Examples
-> 
-> showClass("GPA")
-Class "GPA" [package "GPA"]
-
-Slots:
-                                          
-Name:       fit  setting gwasPval   annMat
-Class:     list     list   matrix   matrix
-> 
-> fit.GPA.wAnn <- GPA( pmat, ann )
-Error in GPA(pmat, ann) : object 'pmat' not found
-Execution halted
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... OK
-  ‘GPA-example.Rnw’... OK
-* checking re-building of vignette outputs ... OK
-* checking PDF version of manual ... OK
-* DONE
-Status: 1 ERROR, 1 WARNING, 3 NOTEs
+* checking examples ...

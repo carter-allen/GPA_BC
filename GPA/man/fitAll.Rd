@@ -50,6 +50,7 @@ Kortemeier E, Ramos PS, Hunt KJ, Kim HJ, Hardiman G, and Chung D (2017),
 \code{\link{GPA}}, \code{\link{pTest}}, and \code{\link{shinyGPA}}.
 }
 \examples{
+\dontrun{
 
 # simulator function
 
@@ -85,6 +86,7 @@ out <- fitAll( pmat )
 
 shinyGPA(out)
 
+}
 }
 \keyword{models}
 \keyword{methods}

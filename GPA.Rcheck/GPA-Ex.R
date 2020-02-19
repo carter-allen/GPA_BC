@@ -22,6 +22,35 @@ flush(stderr()); flush(stdout())
 
 showClass("GPA")
 
+# simulator function
+
+simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
+  
+  m <- length(risk.ind)
+  
+  p.sig <- rbeta( m, alpha, 1 )
+  pvec <- runif(nsnp)
+  pvec[ risk.ind ] <- p.sig
+  
+  return(pvec)
+}
+
+# run simulation
+
+set.seed(12345)
+nsnp <- 1000
+alpha <- 0.3
+pmat <- matrix( NA, nsnp, 5 )
+
+pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+
+ann <- rbinom(n = nrow(pmat), size = 1, prob = 0.15)
+ann <- as.matrix(ann,ncol = 1)
+
 fit.GPA.wAnn <- GPA( pmat, ann )
 fit.GPA.wAnn
 pp.GPA.wAnn <- print( fit.GPA.wAnn )
@@ -51,7 +80,7 @@ flush(stderr()); flush(stdout())
 
 # simulation setting
 
-nBin <- 20000
+nBin <- 1000
 pi1 <- 0.2
 common <- 0.5
 betaAlpha <- c( 0.6, 0.6 )
@@ -124,15 +153,15 @@ simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
 # run simulation
 
 set.seed(12345)
-nsnp <- 10000
+nsnp <- 1000
 alpha <- 0.4
 pmat <- matrix( NA, nsnp, 5 )
 
-pmat[,1] <- simulator( c(1:2000), nsnp=nsnp, alpha=alpha )
-pmat[,2] <- simulator( c(501:2500), nsnp=nsnp, alpha=alpha )
-pmat[,3] <- simulator( c(4001:6000), nsnp=nsnp, alpha=alpha )
-pmat[,4] <- simulator( c(4501:7500), nsnp=nsnp, alpha=alpha )
-pmat[,5] <- simulator( c(8001:10000), nsnp=nsnp, alpha=alpha )
+pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
 
 # Fit GPA for all possible pairs of GWAS datasets
 
@@ -158,6 +187,35 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+
+# simulator function
+
+simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
+  
+  m <- length(risk.ind)
+  
+  p.sig <- rbeta( m, alpha, 1 )
+  pvec <- runif(nsnp)
+  pvec[ risk.ind ] <- p.sig
+  
+  return(pvec)
+}
+
+# run simulation
+
+set.seed(12345)
+nsnp <- 1000
+alpha <- 0.3
+pmat <- matrix( NA, nsnp, 5 )
+
+pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+
+ann <- rbinom(n = nrow(pmat), size = 1, prob = 0.15)
+ann <- as.matrix(ann,ncol = 1)
 
 # GPA without annotation data
 
@@ -189,6 +247,36 @@ flush(stderr()); flush(stdout())
 
 ### ** Examples
 
+
+# simulator function
+
+simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
+  
+  m <- length(risk.ind)
+  
+  p.sig <- rbeta( m, alpha, 1 )
+  pvec <- runif(nsnp)
+  pvec[ risk.ind ] <- p.sig
+  
+  return(pvec)
+}
+
+# run simulation
+
+set.seed(12345)
+nsnp <- 1000
+alpha <- 0.3
+pmat <- matrix( NA, nsnp, 5 )
+
+pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+
+ann <- rbinom(n = nrow(pmat), size = 1, prob = 0.15)
+ann <- as.matrix(ann,ncol = 1)
+
 # GPA without annotation data
 
 fit.GPA.noAnn <- GPA( pmat, NULL )
@@ -218,6 +306,35 @@ flush(stderr()); flush(stdout())
 ### ** Examples
 
 
+# simulator function
+
+simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
+  
+  m <- length(risk.ind)
+  
+  p.sig <- rbeta( m, alpha, 1 )
+  pvec <- runif(nsnp)
+  pvec[ risk.ind ] <- p.sig
+  
+  return(pvec)
+}
+
+# run simulation
+
+set.seed(12345)
+nsnp <- 1000
+alpha <- 0.3
+pmat <- matrix( NA, nsnp, 5 )
+
+pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
+
+ann <- rbinom(n = nrow(pmat), size = 1, prob = 0.15)
+ann <- as.matrix(ann,ncol = 1)
+
 fit.GPA.wAnn <- GPA( pmat, ann )
 cov.GPA.wAnn <- cov( fit.GPA.wAnn )
 assoc.GPA.wAnn <- assoc( fit.GPA.wAnn, FDR=0.05, fdrControl="global" )
@@ -234,6 +351,59 @@ flush(stderr()); flush(stdout())
 ### Name: fitAll
 ### Title: Fit GPA model for all possible pairs of GWAS datasets
 ### Aliases: fitAll
+### Keywords: models methods
+
+### ** Examples
+
+## Not run: 
+##D 
+##D # simulator function
+##D 
+##D simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
+##D   
+##D   m <- length(risk.ind)
+##D   
+##D   p.sig <- rbeta( m, alpha, 1 )
+##D   pvec <- runif(nsnp)
+##D   pvec[ risk.ind ] <- p.sig
+##D   
+##D   return(pvec)
+##D }
+##D 
+##D # run simulation
+##D 
+##D set.seed(12345)
+##D nsnp <- 10000
+##D alpha <- 0.4
+##D pmat <- matrix( NA, nsnp, 5 )
+##D 
+##D pmat[,1] <- simulator( c(1:2000), nsnp=nsnp, alpha=alpha )
+##D pmat[,2] <- simulator( c(501:2500), nsnp=nsnp, alpha=alpha )
+##D pmat[,3] <- simulator( c(4001:6000), nsnp=nsnp, alpha=alpha )
+##D pmat[,4] <- simulator( c(4501:7500), nsnp=nsnp, alpha=alpha )
+##D pmat[,5] <- simulator( c(8001:10000), nsnp=nsnp, alpha=alpha )
+##D 
+##D # Fit GPA for all possible pairs of GWAS datasets
+##D 
+##D out <- fitAll( pmat )
+##D 
+##D # Run the ShinyGPA app using the ouput from fitAll()
+##D 
+##D shinyGPA(out)
+##D 
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("pTest")
+### * pTest
+
+flush(stderr()); flush(stdout())
+
+### Name: pTest
+### Title: Hypothesis testing for pleiotropy
+### Aliases: pTest
 ### Keywords: models methods
 
 ### ** Examples
@@ -255,40 +425,15 @@ simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
 # run simulation
 
 set.seed(12345)
-nsnp <- 10000
-alpha <- 0.4
+nsnp <- 1000
+alpha <- 0.3
 pmat <- matrix( NA, nsnp, 5 )
 
-pmat[,1] <- simulator( c(1:2000), nsnp=nsnp, alpha=alpha )
-pmat[,2] <- simulator( c(501:2500), nsnp=nsnp, alpha=alpha )
-pmat[,3] <- simulator( c(4001:6000), nsnp=nsnp, alpha=alpha )
-pmat[,4] <- simulator( c(4501:7500), nsnp=nsnp, alpha=alpha )
-pmat[,5] <- simulator( c(8001:10000), nsnp=nsnp, alpha=alpha )
-
-# Fit GPA for all possible pairs of GWAS datasets
-
-out <- fitAll( pmat )
-
-# Run the ShinyGPA app using the ouput from fitAll()
-
-shinyGPA(out)
-
-
-
-
-cleanEx()
-nameEx("pTest")
-### * pTest
-
-flush(stderr()); flush(stdout())
-
-### Name: pTest
-### Title: Hypothesis testing for pleiotropy
-### Aliases: pTest
-### Keywords: models methods
-
-### ** Examples
-
+pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
 
 # GPA without annotation data
 
@@ -335,15 +480,15 @@ simulator <- function( risk.ind, nsnp=20000, alpha=0.6 ) {
 # run simulation
 
 set.seed(12345)
-nsnp <- 10000
-alpha <- 0.4
+nsnp <- 1000
+alpha <- 0.3
 pmat <- matrix( NA, nsnp, 5 )
 
-pmat[,1] <- simulator( c(1:2000), nsnp=nsnp, alpha=alpha )
-pmat[,2] <- simulator( c(501:2500), nsnp=nsnp, alpha=alpha )
-pmat[,3] <- simulator( c(4001:6000), nsnp=nsnp, alpha=alpha )
-pmat[,4] <- simulator( c(4501:7500), nsnp=nsnp, alpha=alpha )
-pmat[,5] <- simulator( c(8001:10000), nsnp=nsnp, alpha=alpha )
+pmat[,1] <- simulator( c(1:200), nsnp=nsnp, alpha=alpha )
+pmat[,2] <- simulator( c(51:250), nsnp=nsnp, alpha=alpha )
+pmat[,3] <- simulator( c(401:600), nsnp=nsnp, alpha=alpha )
+pmat[,4] <- simulator( c(451:750), nsnp=nsnp, alpha=alpha )
+pmat[,5] <- simulator( c(801:1000), nsnp=nsnp, alpha=alpha )
 
 # Fit GPA for all possible pairs of GWAS datasets
 
