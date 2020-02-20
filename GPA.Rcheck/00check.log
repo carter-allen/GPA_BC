@@ -2,16 +2,12 @@
 * using R Under development (unstable) (2020-02-07 r77779)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
+* using option ‘--no-build-vignettes’
 * checking for file ‘GPA/DESCRIPTION’ ... OK
 * checking extension type ... Package
 * this is package ‘GPA’ version ‘1.1-0’
 * checking package namespace information ... OK
-* checking package dependencies ... NOTE
-Depends: includes the non-default packages:
-  'Rcpp', 'parallel', 'ggplot2', 'ggrepel', 'plyr', 'vegan', 'DT',
-  'shiny', 'shinyBS'
-Adding so many packages to the search path is excessive and importing
-selectively is preferable.
+* checking package dependencies ... OK
 * checking if this is a source package ... OK
 * checking if there is a namespace ... OK
 * checking for executable files ... OK
@@ -35,49 +31,11 @@ selectively is preferable.
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
-* checking dependencies in R code ... NOTE
-Packages in Depends field not imported from:
-  ‘DT’ ‘plyr’
-  These packages need to be imported from (in the NAMESPACE file)
-  for when this namespace is loaded but not attached.
+* checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... NOTE
-aTest: no visible global function definition for ‘dbeta’
-aTest: no visible global function definition for ‘pchisq’
-fitAll: no visible global function definition for ‘combn’
-fitAll : <anonymous>: no visible global function definition for
-  ‘pchisq’
-pTest: no visible global function definition for ‘pchisq’
-shinyGPA : server : plotInput: no visible global function definition
-  for ‘palette’
-shinyGPA : server : plotInput: no visible global function definition
-  for ‘kmeans’
-shinyGPA : server : plotInput: no visible global function definition
-  for ‘dist’
-shinyGPA : server : plotInput: no visible global function definition
-  for ‘cutree’
-shinyGPA : server : plotInput: no visible global function definition
-  for ‘hclust’
-shinyGPA : server : plotInput: no visible binding for global variable
-  ‘PC1’
-shinyGPA : server : plotInput: no visible binding for global variable
-  ‘PC2’
-shinyGPA : server: no visible global function definition for ‘str’
-shinyGPA : server : <anonymous>: no visible global function definition
-  for ‘pdf’
-shinyGPA : server : <anonymous>: no visible global function definition
-  for ‘dev.off’
-Undefined global functions or variables:
-  PC1 PC2 combn cutree dbeta dev.off dist hclust kmeans palette pchisq
-  pdf str
-Consider adding
-  importFrom("grDevices", "dev.off", "palette", "pdf")
-  importFrom("stats", "cutree", "dbeta", "dist", "hclust", "kmeans",
-             "pchisq")
-  importFrom("utils", "combn", "str")
-to your NAMESPACE file.
+* checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
@@ -101,7 +59,7 @@ GNU make is a SystemRequirements.
 * checking package vignettes in ‘inst/doc’ ... OK
 * checking running R code from vignettes ... OK
   ‘GPA-example.Rnw’... OK
-* checking re-building of vignette outputs ... OK
+* checking re-building of vignette outputs ... SKIPPED
 * checking PDF version of manual ... OK
 * DONE
-Status: 4 NOTEs
+Status: 1 NOTE

@@ -22,24 +22,6 @@ Type 'q()' to quit R.
 > options(warn = 1)
 > library('GPA')
 Loading required package: Rcpp
-Loading required package: parallel
-Loading required package: ggplot2
-Loading required package: ggrepel
-Loading required package: plyr
-Loading required package: vegan
-Loading required package: permute
-Loading required package: lattice
-This is vegan 2.5-6
-Loading required package: DT
-Loading required package: shiny
-
-Attaching package: ‘shiny’
-
-The following objects are masked from ‘package:DT’:
-
-    dataTableOutput, renderDataTable
-
-Loading required package: shinyBS
 
 Attaching package: ‘GPA’
 
@@ -864,7 +846,7 @@ p-value:  1.316032e-18
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  24.261 0.053 24.321 0.001 0 
+Time elapsed:  24.021 0.071 24.095 0.002 0 
 > grDevices::dev.off()
 null device 
           1 
