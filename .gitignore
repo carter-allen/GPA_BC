@@ -31,4 +31,5 @@
 .projects
 .seed
 .settings
-.tm_properties
+.tm_propertie
+.DS_Store
