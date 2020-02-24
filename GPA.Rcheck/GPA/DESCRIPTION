@@ -1,7 +1,7 @@
 Package: GPA
 Type: Package
-Version: 1.1-0
-Date: 2017-06-30
+Version: 0.99.0
+Date: 2020-02-24
 Title: GPA (Genetic analysis incorporating Pleiotropy and Annotation)
 Author: Dongjun Chung, Emma Kortemeier
 Maintainer: Dongjun Chung <dongjun.chung@gmail.com>
@@ -15,7 +15,9 @@ License: GPL (>= 2)
 URL: https://groups.google.com/forum/#!forum/gpa-user-group
 git_url: http://dongjunchung.github.io/GPA/
 NeedsCompilation: yes
-Packaged: 2020-02-20 16:02:22 UTC; carterallen
-biocViews: Software, StatisticalMethod, Classification
+Packaged: 2020-02-24 17:55:56 UTC; carterallen
+biocViews: Software, StatisticalMethod, Classification,
+        GenomeWideAssociation, SNP, Genetics, Clustering,
+        MultipleComparison, Preprocessing
 SystemRequirements: GNU make
-Built: R 4.0.0; x86_64-pc-linux-gnu; 2020-02-20 16:02:31 UTC; unix
+Built: R 4.0.0; x86_64-pc-linux-gnu; 2020-02-24 17:57:20 UTC; unix
