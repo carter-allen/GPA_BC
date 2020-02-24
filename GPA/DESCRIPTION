@@ -3,7 +3,7 @@ Type: Package
 Version: 0.99.0
 Date: 2020-02-24
 Title: GPA (Genetic analysis incorporating Pleiotropy and Annotation)
-Author: Dongjun Chung, Emma Kortemeier
+Author: Dongjun Chung, Emma Kortemeier, Carter Allen
 Maintainer: Dongjun Chung <dongjun.chung@gmail.com>
 Depends: R (>= 4.0.0), methods, graphics, Rcpp
 Imports: parallel, ggplot2, ggrepel, plyr, vegan, DT, shiny, shinyBS, stats, utils, grDevices
